@@ -1,0 +1,8 @@
+note that these all use nodes with only one data field, objects can contain many data fields
+be careful when dealing with object references
+
+if we wanted to order objects by their data field, and those fields are strings.
+we would probably need perfect hashing as a nodeID field and the key as the nodeData
+
+code improvements:
+handle searches for data that is not there, and will not be found

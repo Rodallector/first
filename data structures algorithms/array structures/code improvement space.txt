@@ -1,0 +1,29 @@
+error checking could handle cases where:
+the structure operated on is already full,
+the targetKey is not in the structure,
+the memory available to perform the action is inadequate,
+function overloading is handled
+
+/*
+	HOWTO HANDLE FUNCTION OVERLOADING
+	
+	*create seperate functions similar in name that handle different data
+	*check for instances of argument type inside function
+	*handle undefined in multiple parameters for functions with same name
+	*create eval() function that changes the target field type
+	
+	if ((typeof targetKey) == number) {
+		
+	}
+	else {
+		
+	}
+	
+*/
+
+if javascript doesnt handle dynamic array resizing, then you must handle
+array expandability manually. 
+to do this you must modify the insert algorithm
+create a new array with all the content of the current array copied to it
+trash the old array
+this will fail if your resources are exhausted
