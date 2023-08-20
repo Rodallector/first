@@ -1,1 +1,0 @@
-some of the features of a stack may include a variable to hold the current top size, as opposed to a dynamically incrementing structure as in my javascript example. you may have an array that is initiated with a max stack size, and in that case, top will hold the current used space and the CRUD ops will provide ways to check for min and max values neccessary for operation
