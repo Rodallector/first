@@ -126,6 +126,7 @@ class BinaryTree {
 			let node = this.search(target, this.root);
 			if (node) {
 				this.removeNode(node);
+				this.count--;
 			}
 			else {
 				console.log("target doesn't exist");
