@@ -9,7 +9,6 @@ class Node {
 class linkedList {
 
 	constructor() {
-		//this.head = this.tail = new Node(); //circular linked list
 		this.head = new Node(null, "head");
 		this.tail = new Node(null, "tail");
 		this.head.next = this.tail;
