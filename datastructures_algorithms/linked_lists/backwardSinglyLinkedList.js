@@ -15,6 +15,7 @@ class linkedList {
 
 	insert(newData) {
 		if (count < max) {
+			//this.head as a parameter refers to the 'old' head
 			this.head = new Node(this.head, newData);
 			this.count++;
 			return true;
