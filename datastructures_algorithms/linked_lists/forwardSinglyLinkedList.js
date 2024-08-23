@@ -11,132 +11,76 @@ class linkedList {
 		this.head = new Node();
 		this.count = 1;
 	}
-
+	
 	insert(data) {
 		let i = this.head;
-		if (this.head.data === undefined)
-		{
-			//head has not been initialized with data
-			this.head.data = data;
-			return true;
+		while (i.next) {
+			i = i.next;
 		}
-		else
-		{
-			while (i.next !== null)
-			{
-				i = i.next;
-			}
-			i.next = new Node(data);
-			this.count++;
-			return true;
-		}
+		i.next = new Node(data);
+		this.count++;
+		return true;
 	}
 
-	fetch(target, bool) {
-		//the function remove uses the boolean in order to receive the preceeding node if applicable
-		let pointer = this.head;
-		let previous = bool || false;
-		
-		if (this.head.data === target)
-		{
-			return this.head;
+	fetch(target) {
+		let i = this.head;
+		while (i.data !== target & i.next !== null) {
+			i = i.next;
 		}
-		
-		while (pointer.next !== null)
-		{
-			if (pointer.next.data === target)
-			{				
-				if (previous)
-				{
-					return pointer;
-				}
-				else
-				{
-					//fetch is not being used in conjunction with the remove function
-					return pointer.next;
-				}
-			}
-			pointer = pointer.next;
+		if (i.data === target) {
+			return i;
 		}
 		console.log("target not found");
 		return false;
 	}
 
 	remove(target) {
-		let targetNode = this.fetch(target, true); //receives the node before the target or head
-		if (targetNode)
-		{			
-			if (targetNode === this.head)
-			{	
-				if (this.count === 1)
-				{
-					//head is the only node that exists
-					this.head = new Node();
-					return true;
-				}
-				
-				if (this.head.next.data === target)
-				{
-					if (this.count > 2)
-					{
-						//there is a node after the target
-						this.head.next = this.head.next.next;
-						this.count--;
-						return true;
-					}
-					else
-					{
-						//there is not a node after the target
-						this.head.next = null;
-						this.count--;
-						return true;
-					}
-				}
+		let i = this.head;
+		
+		//special case: target is the head node
+		if (i.data === target) {
+			if (i.next === null) {
+				this.emptyList();
+				return true;
 			}
-			else
-			{
-				if (targetNode.next.next)
-				{
-					targetNode.next = targetNode.next.next;
-					this.count--;
-					return true;
-				}
-				else
-				{
-					//the target node is the last in the list
-					targetNode.next = null;
-					this.count--;
-					return true;
-				}
+			this.head = this.head.next;
+			this.count--;
+			return true;
+		}
+		
+		while (i.next !== null & i.next.data !== target) {
+			i = i.next;
+		}
+		
+		//target found
+		if (i.next.data === target) {
+			if (i.next.next !== null) {
+				let i = i.next.next;
+				count--;
+				return true;
 			}
+			let i.next = null;
+			count--;
+			return true;
 		}
-		else
-		{
-			console.log("deleting failed");
-			return false;
-		}
+		console.log("target not found");
+		return false;
 	}
 
 	update(target, value) {
-		let i = this.fetch(target);
-		if (i)
+		//let i = this.fetch(target);
+		if (let i = this.fetch(target))
 		{
 			i.data = value;
 			return true;
 		}
-		else
-		{
-			console.log("target value doesn't exist");
-			return false;
-		}
+		console.log("target value doesn't exist");
+		return false;
 	}
-
+	
 	outputList() {
-		let i = this.head;
-		while(i)
-		{
+		for (let i = this.head; i; i = i.next) {
 			console.log(i.data);
-			i = i.next;
 		}
 		return true;
 	}
@@ -153,9 +97,19 @@ class linkedList {
 
 }
 
+/*
+	this linked list constructs the list in order, and maintains chronology
+	CRUD ops dont work on multiple objects per single operation
+	targets are only found via data values, not objects
+	else statements have been omitted, and rely on return statements
+
+	next version enhancements:
+	-add ability to work with data values of 0
+	-add ability to perform crud on multiple nodes with same data value, rather than one at a time
+*/
+
 //execution
 var List = new linkedList();
 List.insert(1);
 List.insert(2);
 List.insert(3);
-List.insert(4);
